@@ -4,7 +4,7 @@ import { Badge, Card, Empty, ErrorMessage, EventTable, Icon, Loading, PageHeadin
 
 export function SummaryStats({ summary }) {
   return <div className="stat-grid">{[
-    ['Total scans', summary.total, 'scan', 'All recorded events', 'blue'],
+    ['Total scans', summary.total, 'scan', 'Retained sanitization scans', 'blue'],
     ['Safe / Unchanged', summary.unchanged, 'check', 'Passed the allowlist unchanged', 'green'],
     ['Sanitized', summary.sanitized, 'shield', 'Disallowed content removed', 'amber'],
     ['Normalized', summary.normalized, 'code', 'HTML formatting adjusted', 'purple'],
@@ -31,7 +31,7 @@ function Distribution({ summary }) {
 export default function Dashboard() {
   const { publicDemo } = useEnvironment();
   const { data, error, loading, reload } = useResource('/summary');
-  return <><PageHeading eyebrow={publicDemo ? "SHARED DEMONSTRATION ACTIVITY" : "YOUR LOCAL SECURITY OVERVIEW"} title="Security Dashboard" action={<button className="button ghost" onClick={reload} disabled={loading}><Icon name="refresh" size={16} />Refresh</button>}>A live view of the HTML processed by this security engine.</PageHeading>{loading ? <Loading /> : error ? <ErrorMessage retry={reload}>{error}</ErrorMessage> : data && <>
+  return <><PageHeading eyebrow={publicDemo ? "SHARED DEMONSTRATION ACTIVITY" : "YOUR LOCAL SECURITY OVERVIEW"} title="Security Dashboard" action={<button className="button ghost" onClick={reload} disabled={loading}><Icon name="refresh" size={16} />Refresh</button>}>Recorded scanner and customer-review sanitization results. Refresh to retrieve the latest retained data.</PageHeading>{loading ? <Loading /> : error ? <ErrorMessage retry={reload}>{error}</ErrorMessage> : data && <>
     <SummaryStats summary={data} />
     <div className="protection-banner"><span className="icon-box"><Icon name="shield" /></span><div><strong>Server-side sanitization active</strong><p>Strict formatting allowlist · browser-side re-sanitization · SQLite storage</p></div><span className="badge unchanged"><span />PROTECTED PIPELINE</span></div>
     <div className="grid dashboard-charts"><Card title="Daily scan activity" eyebrow="LAST 7 DAYS" action={<span className="subtle-tag">UTC</span>}>{data.daily?.length ? <TrendChart daily={data.daily} /> : <Empty />}</Card><Card title="Result distribution" eyebrow="RETAINED SCANS"><Distribution summary={data} /></Card></div>

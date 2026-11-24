@@ -19,9 +19,14 @@ export function registerDemoRoutes(app, repository) {
   app.post('/api/demo/reviews',(req,res)=>{
     if(!req.is('application/json') || !req.body || Object.keys(req.body).length!==1 || typeof req.body.sample !== 'string' || !Object.hasOwn(samples,req.body.sample)) throw new HttpError(400,'INVALID_INPUT','Select a provided sample review.');
     const analysis = analyzeHtml(samples[req.body.sample]);
-    const record=insert.run(analysis.sanitized_content,new Date().toISOString());
-    const event = repository.addEvent(analysis);
-    prune.run();
+    db.exec('BEGIN');
+    let record, event;
+    try {
+      record=insert.run(analysis.sanitized_content,new Date().toISOString());
+      event=repository.addEvent(analysis);
+      prune.run();
+      db.exec('COMMIT');
+    } catch (error) { db.exec('ROLLBACK'); throw error; }
     res.status(201).json({data:{id:Number(record.lastInsertRowid),stored:true,analysis:event}});
   });
   app.get('/api/demo/reviews',(req,res)=>res.json({data:list.all()}));

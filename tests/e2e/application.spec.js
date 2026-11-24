@@ -238,3 +238,30 @@ test('rich review removes disallowed formatting attributes and records a real sc
   await expect(page.getByRole('link',{name:'View actual security event'})).toBeVisible();
   expect((await (await request.get('/api/summary')).json()).data.total).toBe(before+1);
 });
+
+test('real-world illustrations track the selected sample and both DOM protections work', async ({page})=>{
+  await page.goto('/#demo');
+  await page.getByRole('button',{name:'Markup-like search'}).click();
+  await page.getByRole('button',{name:'Search',exact:true}).click();
+  await expect(page.getByTestId('unsafe-illustration').locator('b')).toHaveText('Notebook');
+  await expect(page.getByTestId('demo-safe-text')).toHaveText('<b>Notebook</b>');
+  await page.getByRole('button',{name:'Customer review'}).click();
+  await page.getByLabel('Sample review').selectOption('list');
+  await expect(page.getByTestId('unsafe-illustration').locator('li')).toHaveCount(2);
+  await page.getByLabel('Sample review').selectOption('styled');
+  await expect(page.getByTestId('unsafe-illustration').locator('.illustration-red')).toBeVisible();
+  await page.getByRole('button',{name:'Live message'}).click();
+  await page.getByRole('button',{name:'Styled rich-text sample'}).click();
+  await expect(page.getByTestId('unsafe-illustration').locator('.illustration-red')).toBeVisible();
+  await expect(page.getByTestId('comparison-text')).toHaveText('<p style="color:red"><strong>Excellent notebook!</strong></p>');
+  await expect(page.getByTestId('safe-preview').locator('strong')).toHaveText('Excellent notebook!');
+  await expect(page.getByTestId('safe-preview').locator('[style]')).toHaveCount(0);
+  await page.getByLabel('Preview message').fill('Different custom message');
+  await expect(page.getByTestId('unsafe-illustration')).toHaveText('Different custom message');
+});
+test('protection page compares text and sanitized formatting for the same input', async ({page})=>{
+  await page.goto('/#protection');
+  await page.getByLabel('Sample text').fill('<b>Hello</b>');
+  await expect(page.getByTestId('comparison-text')).toHaveText('<b>Hello</b>');
+  await expect(page.getByTestId('safe-preview').locator('b')).toHaveText('Hello');
+});

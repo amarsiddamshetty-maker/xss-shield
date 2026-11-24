@@ -48,3 +48,7 @@ After source changes, run `npm run build` before restarting. PDF font/excerpt li
 ## Real-world learning enhancement
 
 Product search demonstrates an actual request and JSON response with safe text rendering. Fixed rich-text review samples are sanitized on the server, saved in a bounded SQLite table, re-sanitized on display, and counted in existing scan reports. Browser greeting updates use React text rendering without a request. Unsafe paths use fixed visual illustrations only. New regression results and hosted release status must be verified separately.
+
+## Application-wide review and comparison update
+
+Reviewed all nine page components. Fixed stale scanner results on input changes, added sample-matched non-executable illustrations and actual browser plain-text/rich-text comparison, and aligned dashboard, logs, reports and about descriptions with review telemetry. Review insert, scan event and retention pruning are transactional. Arbitrary input is never rendered in the illustrative panel; unknown examples appear as text. Browser rich-text output uses the existing strict SafePreview boundary and does not generate server events. Added regression tests for sample-specific illustrations and both protected modes. CI and hosted verification must be confirmed separately. This is a targeted source review, not an independent penetration test.
