@@ -9,12 +9,15 @@ import Dashboard from './pages/Dashboard.jsx';
 import Logs from './pages/Logs.jsx';
 import Reports from './pages/Reports.jsx';
 import About from './pages/About.jsx';
+import RealWorldDemo from './pages/RealWorldDemo.jsx';
+import Protection from './pages/Protection.jsx';
 
 const navigation = [
   ['home', 'Home', 'home'], ['scanner', 'XSS Scanner', 'scan'], ['lab', 'Learning Lab', 'lab'],
+  ['demo', 'Real-World Demo', 'home'], ['protection', 'Protection', 'shield'],
   ['dashboard', 'Dashboard', 'chart'], ['logs', 'Activity Logs', 'logs'], ['reports', 'Reports', 'file'], ['about', 'About', 'info'],
 ];
-const pages = { home: Home, scanner: Scanner, lab: LearningLab, dashboard: Dashboard, logs: Logs, reports: Reports, about: About };
+const pages = { home: Home, scanner: Scanner, lab: LearningLab, demo: RealWorldDemo, protection: Protection, dashboard: Dashboard, logs: Logs, reports: Reports, about: About };
 const readRoute = () => location.hash.slice(1).split('?')[0] || 'home';
 
 export default function App() {

@@ -34,7 +34,7 @@ test('all seven navigation links work and main pages have desktop screenshots', 
   await expect(page).toHaveTitle(/Home.*XSS Shield/);
   const destinations = [
     ['Home', 'home'], ['XSS Scanner', 'scanner'], ['Learning Lab', 'learning-lab'],
-    ['Dashboard', 'dashboard'], ['Activity Logs', 'activity-logs'], ['Reports', 'reports'], ['About', 'about'],
+    ['Real-World Demo', 'real-world-demo'], ['Protection', 'protection'], ['Dashboard', 'dashboard'], ['Activity Logs', 'activity-logs'], ['Reports', 'reports'], ['About', 'about'],
   ];
   for (const [name, file] of destinations) {
     await navigate(page, name);
@@ -184,7 +184,7 @@ test('downloads a real multi-page PDF with live data, scope and page numbers', a
 
 test('all pages fit a mobile viewport and scanning remains usable', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  for (const hash of ['home', 'scanner', 'lab', 'dashboard', 'logs', 'reports', 'about']) {
+  for (const hash of ['home', 'scanner', 'lab', 'demo', 'protection', 'dashboard', 'logs', 'reports', 'about']) {
     await page.goto(`/#${hash}`);
     await expect(page.locator('main h1')).toBeVisible();
     await expect(page.getByRole('status')).toHaveCount(0);
@@ -195,4 +195,26 @@ test('all pages fit a mobile viewport and scanning remains usable', async ({ pag
   await runScan(page, '<strong>Mobile preview</strong>');
   await expect(page.getByTestId('safe-preview')).toHaveText('Mobile preview');
   await page.screenshot({ path: resolve(screenshots, 'mobile.png'), fullPage: true });
+});
+
+test('fictional shop renders sample input as text and retains session reviews', async ({page})=>{
+  await page.goto('/#demo');
+  await page.getByLabel('Search products').fill('Notebook');
+  await page.getByRole('button',{name:'Search',exact:true}).click();
+  await expect(page.getByTestId('demo-safe-text')).toHaveText('Notebook');
+  await page.getByRole('button',{name:'Customer review'}).click();
+  await page.getByLabel('Sample review').fill('<b>Nice notebook</b>');
+  await page.getByRole('button',{name:'Post sample review'}).click();
+  await expect(page.getByTestId('demo-safe-text')).toHaveText('<b>Nice notebook</b>');
+  await expect(page.getByTestId('demo-safe-text').locator('b')).toHaveCount(0);
+  await page.getByRole('button',{name:'Live message'}).click();
+  await page.getByLabel('Preview message').fill('<b>Welcome</b>');
+  await expect(page.getByTestId('demo-safe-text')).toHaveText('<b>Welcome</b>');
+});
+test('protection page explains encoding using literal text', async ({page})=>{
+  await page.goto('/#protection');
+  await page.getByLabel('Sample text').fill('<b>Hello</b>');
+  await expect(page.getByLabel('Encoded representation')).toHaveText('&lt;b&gt;Hello&lt;/b&gt;');
+  await expect(page.getByTestId('encoding-safe-text')).toHaveText('<b>Hello</b>');
+  await expect(page.getByTestId('encoding-safe-text').locator('b')).toHaveCount(0);
 });
