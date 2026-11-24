@@ -1,0 +1,33 @@
+import { test, expect } from '@playwright/test';
+import { readFileSync } from 'node:fs';
+
+test.use({ baseURL: 'http://127.0.0.1:3101' });
+test('public demonstration discloses shared temporary data and preserves the complete scan/report workflow', async ({ page }, testInfo) => {
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+  page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
+  await page.goto('/#scanner');
+  await expect(page.getByRole('note')).toContainText('Everyone can view submitted sanitized content');
+  await expect(page.getByRole('note')).toContainText('500');
+  await expect(page.locator('.local-pill')).toHaveText('PUBLIC DEMO');
+  await page.getByLabel('HTML to analyze').fill('<p title="demo">Shared sample</p>');
+  await page.getByRole('button', { name: 'Analyze and Sanitize' }).click();
+  await expect(page.getByTestId('scan-result')).toContainText('Sanitized');
+  await expect(page.getByTestId('safe-preview')).toHaveText('Shared sample');
+  await page.getByRole('navigation').getByRole('link', { name: 'Reports', exact: true }).click();
+  const downloadPromise = page.waitForEvent('download');
+  await page.getByRole('button', { name: 'Download PDF report' }).click();
+  const download = await downloadPromise;
+  const path = testInfo.outputPath('public-demo-report.pdf');
+  await download.saveAs(path);
+  const pdf = readFileSync(path).toString('latin1');
+  expect(pdf).toContain('Public demonstration - shared, temporary history');
+  expect(pdf).toContain('Summary - currently retained scans');
+  expect(pdf).toContain('Shared sample');
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.getByRole('navigation').getByRole('link', { name: 'Home', exact: true }).click();
+  await expect(page.getByRole('note')).toBeVisible();
+  await expect(page.getByText('Temporary shared records')).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390);
+  expect(errors).toEqual([]);
+});

@@ -1,0 +1,575 @@
+%PDF-1.3
+%ºß¬à
+3 0 obj
+<</Type /Page
+/Parent 1 0 R
+/Resources 2 0 R
+/MediaBox [0 0 595.2799999999999727 841.8899999999999864]
+/Contents 4 0 R
+>>
+endobj
+4 0 obj
+<<
+/Length 4831
+>>
+stream
+0.5670000000000001 w
+0 G
+BT
+/F1 23 Tf
+26.4499999999999993 TL
+0.047 0.157 0.251 rg
+51.0236220472441033 779.5277952755905062 Td
+(XSS SHIELD) Tj
+ET
+BT
+/F1 17 Tf
+19.5499999999999972 TL
+0.176 0.227 0.294 rg
+51.0236220472441033 739.8144094488188784 Td
+(Security activity report) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.176 0.227 0.294 rg
+51.0236220472441033 708.0947244094488724 Td
+(Generated: 11/24/2026, 7:36:23 PM) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.176 0.227 0.294 rg
+51.0236220472441033 685.7010236220471597 Td
+(Local educational HTML sanitization prototype) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0.078 0.325 0.451 rg
+51.0236220472441033 651.9687401574802834 Td
+(Summary - all recorded scans) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.176 0.227 0.294 rg
+51.0236220472441033 624.2459055118109745 Td
+(Total scans: 2) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.176 0.227 0.294 rg
+51.0236220472441033 607.5214960629921279 Td
+(Safe / Unchanged: 0) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.176 0.227 0.294 rg
+51.0236220472441033 590.7970866141731676 Td
+(Sanitized: 2) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.176 0.227 0.294 rg
+51.0236220472441033 574.0726771653542073 Td
+(Normalized: 0) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.176 0.227 0.294 rg
+51.0236220472441033 557.348267716535247 Td
+(Removed elements: 0) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.176 0.227 0.294 rg
+51.0236220472441033 540.6238582677164004 Td
+(Removed attributes: 2) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.176 0.227 0.294 rg
+51.0236220472441033 523.8994488188975538 Td
+(Total removed items: 2) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0.078 0.325 0.451 rg
+51.0236220472441033 490.1671653543305638 Td
+(Recent security activity) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.176 0.227 0.294 rg
+51.0236220472441033 462.4443307086612549 Td
+(Includes 2 recent events \(maximum 100\). Summary totals cover all records. Content excerpts are limited to 500) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.176 0.227 0.294 rg
+51.0236220472441033 445.7199212598423514 Td
+(characters per event.) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0.078 0.325 0.451 rg
+51.0236220472441033 423.3262204724407525 Td
+(#2 | sanitized | 11/24/2026, 7:36:23 PM) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.176 0.227 0.294 rg
+51.0236220472441033 399.6002362204721976 Td
+(Action: Removed disallowed HTML. Removed items: 1.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.176 0.227 0.294 rg
+51.0236220472441033 377.2065354330705986 Td
+(The formatting-only policy removed 0 HTML node\(s\) and 1 attribute\(s\). A removal indicates a policy change, not) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.176 0.227 0.294 rg
+51.0236220472441033 360.4821259842516952 Td
+(proof of an XSS attack.) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.176 0.227 0.294 rg
+51.0236220472441033 338.0884251968500962 Td
+(Sanitized content: <p>Local deployment verified</p>) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0.078 0.325 0.451 rg
+51.0236220472441033 317.0270078740154531 Td
+(#1 | sanitized | 11/24/2026, 7:23:30 PM) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.176 0.227 0.294 rg
+51.0236220472441033 293.3010236220469551 Td
+(Action: Removed disallowed HTML. Removed items: 1.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.176 0.227 0.294 rg
+51.0236220472441033 270.9073228346453561 Td
+(The formatting-only policy removed 0 HTML node\(s\) and 1 attribute\(s\). A removal indicates a policy change, not) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.176 0.227 0.294 rg
+51.0236220472441033 254.1829133858263958 Td
+(proof of an XSS attack.) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.176 0.227 0.294 rg
+51.0236220472441033 231.7892125984247969 Td
+(Sanitized content: <p>Development workflow verified</p>) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0.078 0.325 0.451 rg
+51.0236220472441033 199.3892125984248196 Td
+(Security recommendations) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.176 0.227 0.294 rg
+51.0236220472441033 171.6663779527555107 Td
+(1. Validate input shape and size on the server.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.176 0.227 0.294 rg
+51.0236220472441033 149.2726771653539117 Td
+(2. Sanitize untrusted HTML with a maintained library and a restrictive policy.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.176 0.227 0.294 rg
+51.0236220472441033 126.8789763779523128 Td
+(3. Use output encoding when displaying text, and avoid unsafe DOM sinks.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.176 0.227 0.294 rg
+51.0236220472441033 104.4852755905508275 Td
+(4. Keep dependencies updated and retain a strict Content Security Policy.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.176 0.227 0.294 rg
+51.0236220472441033 82.0915748031493422 Td
+(5. Submit demonstration content only; sanitized text can still contain personal information.) Tj
+ET
+0.82 0.86 0.89 RG
+51.0236220472441033 48.1892125984250868 m
+544.2519685039370643 48.1892125984250868 l
+S
+BT
+/F1 8 Tf
+9.1999999999999993 TL
+0.353 0.412 0.471 rg
+51.0236220472441033 31.1813385826770855 Td
+(XSS Shield | Educational security report) Tj
+ET
+BT
+/F1 8 Tf
+9.1999999999999993 TL
+0.353 0.412 0.471 rg
+503.6119685039370211 31.1813385826770855 Td
+(Page 1 of 2) Tj
+ET
+endstream
+endobj
+5 0 obj
+<</Type /Page
+/Parent 1 0 R
+/Resources 2 0 R
+/MediaBox [0 0 595.2799999999999727 841.8899999999999864]
+/Contents 6 0 R
+>>
+endobj
+6 0 obj
+<<
+/Length 2149
+>>
+stream
+0.5670000000000001 w
+0 G
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0.078 0.325 0.451 rg
+51.0236220472441033 768.1892125984252289 Td
+(Project scope and limitations) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.176 0.227 0.294 rg
+51.0236220472441033 740.46637795275592 Td
+(Educational application-level prototype; not an enterprise Web Application Firewall or external website scanner.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.176 0.227 0.294 rg
+51.0236220472441033 718.072677165354321 Td
+(Sanitization is a policy decision and does not prove an attack occurred.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.176 0.227 0.294 rg
+51.0236220472441033 695.678976377952722 Td
+(Summary totals cover all stored scans; activity lists the latest 100 events only.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.176 0.227 0.294 rg
+51.0236220472441033 673.2852755905511231 Td
+(Invalid requests are rejected and are not stored as security events.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.176 0.227 0.294 rg
+51.0236220472441033 650.8915748031495241 Td
+(Only basic formatting is supported; all HTML attributes are removed.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.176 0.227 0.294 rg
+51.0236220472441033 628.4978740157480388 Td
+(Stored sanitized content may contain user-written text. Do not submit secrets or personal information.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.176 0.227 0.294 rg
+51.0236220472441033 606.1041732283464398 Td
+(A sanitization event is not proof of a confirmed XSS attack. This report describes the local application only.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.176 0.227 0.294 rg
+51.0236220472441033 589.3797637795274795 Td
+(Invalid requests are not included in scan totals. Non-ASCII characters are represented as ? in this PDF; full text) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.176 0.227 0.294 rg
+51.0236220472441033 572.6553543307086329 Td
+(remains available in the application.) Tj
+ET
+0.82 0.86 0.89 RG
+51.0236220472441033 48.1892125984250868 m
+544.2519685039370643 48.1892125984250868 l
+S
+BT
+/F1 8 Tf
+9.1999999999999993 TL
+0.353 0.412 0.471 rg
+51.0236220472441033 31.1813385826770855 Td
+(XSS Shield | Educational security report) Tj
+ET
+BT
+/F1 8 Tf
+9.1999999999999993 TL
+0.353 0.412 0.471 rg
+503.6119685039370211 31.1813385826770855 Td
+(Page 2 of 2) Tj
+ET
+endstream
+endobj
+1 0 obj
+<</Type /Pages
+/Kids [3 0 R 5 0 R ]
+/Count 2
+>>
+endobj
+7 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+8 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica-Bold
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+9 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica-Oblique
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+10 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica-BoldOblique
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+11 0 obj
+<<
+/Type /Font
+/BaseFont /Courier
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+12 0 obj
+<<
+/Type /Font
+/BaseFont /Courier-Bold
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+13 0 obj
+<<
+/Type /Font
+/BaseFont /Courier-Oblique
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+14 0 obj
+<<
+/Type /Font
+/BaseFont /Courier-BoldOblique
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+15 0 obj
+<<
+/Type /Font
+/BaseFont /Times-Roman
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+16 0 obj
+<<
+/Type /Font
+/BaseFont /Times-Bold
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+17 0 obj
+<<
+/Type /Font
+/BaseFont /Times-Italic
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+18 0 obj
+<<
+/Type /Font
+/BaseFont /Times-BoldItalic
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+19 0 obj
+<<
+/Type /Font
+/BaseFont /ZapfDingbats
+/Subtype /Type1
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+20 0 obj
+<<
+/Type /Font
+/BaseFont /Symbol
+/Subtype /Type1
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+2 0 obj
+<<
+/ProcSet [/PDF /Text /ImageB /ImageC /ImageI]
+/Font <<
+/F1 7 0 R
+/F2 8 0 R
+/F3 9 0 R
+/F4 10 0 R
+/F5 11 0 R
+/F6 12 0 R
+/F7 13 0 R
+/F8 14 0 R
+/F9 15 0 R
+/F10 16 0 R
+/F11 17 0 R
+/F12 18 0 R
+/F13 19 0 R
+/F14 20 0 R
+>>
+/XObject <<
+>>
+>>
+endobj
+21 0 obj
+<<
+/Producer (jsPDF 4.2.1)
+/CreationDate (D:20261124193623+05'30')
+>>
+endobj
+22 0 obj
+<<
+/Type /Catalog
+/Pages 1 0 R
+/OpenAction [3 0 R /FitH null]
+/PageLayout /OneColumn
+>>
+endobj
+xref
+0 23
+0000000000 65535 f 
+0000007373 00000 n 
+0000009198 00000 n 
+0000000015 00000 n 
+0000000152 00000 n 
+0000005035 00000 n 
+0000005172 00000 n 
+0000007436 00000 n 
+0000007561 00000 n 
+0000007691 00000 n 
+0000007824 00000 n 
+0000007962 00000 n 
+0000008086 00000 n 
+0000008215 00000 n 
+0000008347 00000 n 
+0000008483 00000 n 
+0000008611 00000 n 
+0000008738 00000 n 
+0000008867 00000 n 
+0000009000 00000 n 
+0000009102 00000 n 
+0000009448 00000 n 
+0000009534 00000 n 
+trailer
+<<
+/Size 23
+/Root 22 0 R
+/Info 21 0 R
+/ID [ <C5D687A662651BAE2C0FA231C3C5D2D5> <C5D687A662651BAE2C0FA231C3C5D2D5> ]
+>>
+startxref
+9638
+%%EOF

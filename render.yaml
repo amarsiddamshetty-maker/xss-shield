@@ -1,0 +1,20 @@
+# Free demonstration only. No paid disk or database is provisioned.
+services:
+  - type: web
+    name: xss-shield-demo
+    runtime: node
+    plan: free
+    buildCommand: npm ci --include=dev && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: 24.22.3
+      - key: NODE_ENV
+        value: production
+      - key: PUBLIC_DEMO
+        value: "true"
+      - key: DB_PATH
+        value: /tmp/xss-shield/public-demo.sqlite
+      - key: RATE_LIMIT_MAX
+        value: "120"
