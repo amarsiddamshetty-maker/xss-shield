@@ -1,0 +1,17 @@
+node_modules/
+dist/
+data/*.sqlite*
+data/*.db*
+coverage/
+test-results/
+playwright-report/
+.env
+.env.*
+!.env.example
+.agents/
+.codex/
+.aws/
+.npm-cache/
+*.log
+xss-shield-source.zip
+
