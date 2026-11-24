@@ -197,19 +197,27 @@ test('all pages fit a mobile viewport and scanning remains usable', async ({ pag
   await page.screenshot({ path: resolve(screenshots, 'mobile.png'), fullPage: true });
 });
 
-test('fictional shop renders sample input as text and retains session reviews', async ({page})=>{
+test('real-world demo distinguishes server search, stored review and browser preview', async ({page})=>{
   await page.goto('/#demo');
   await page.getByLabel('Search products').fill('Notebook');
+  const search=page.waitForResponse(r=>r.url().includes('/api/demo/search')&&r.ok());
   await page.getByRole('button',{name:'Search',exact:true}).click();
+  await search;
   await expect(page.getByTestId('demo-safe-text')).toHaveText('Notebook');
   await page.getByRole('button',{name:'Customer review'}).click();
-  await page.getByLabel('Sample review').fill('<b>Nice notebook</b>');
   await page.getByRole('button',{name:'Post sample review'}).click();
-  await expect(page.getByTestId('demo-safe-text')).toHaveText('<b>Nice notebook</b>');
+  await expect(page.getByText(/SQLite saved review/)).toBeVisible();
+  await page.reload();
+  await page.getByRole('button',{name:'Customer review'}).click();
+  await page.getByRole('button',{name:'Retrieve saved reviews'}).click();
+  await expect(page.getByTestId('demo-safe-text')).toHaveText('<b>Excellent notebook!</b>');
   await expect(page.getByTestId('demo-safe-text').locator('b')).toHaveCount(0);
   await page.getByRole('button',{name:'Live message'}).click();
+  const calls=[];
+  page.on('request',req=>{if(req.url().includes('/api/'))calls.push(req.url());});
   await page.getByLabel('Preview message').fill('<b>Welcome</b>');
   await expect(page.getByTestId('demo-safe-text')).toHaveText('<b>Welcome</b>');
+  expect(calls).toEqual([]);
 });
 test('protection page explains encoding using literal text', async ({page})=>{
   await page.goto('/#protection');

@@ -3558,3 +3558,5 @@ tr:hover td {
 .demo-text,.demo-reviews p{white-space:pre-wrap;overflow-wrap:anywhere;padding:12px;border:1px solid var(--line);border-radius:8px}.demo-tabs{flex-wrap:wrap}
 @media(max-width:900px){.home-hero{grid-template-columns:1fr}.hero-visual{height:280px}}
 @media(max-width:600px){.home-hero{padding:18px}.hero-visual{height:250px}.hero-actions .button{white-space:normal}.demo-tabs button{flex:1 1 auto}.demo-products article{padding:12px}}
+
+.demo-flow{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:10px}.demo-flow li{flex:1 1 120px;min-width:0;display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:10px;padding:12px;font-size:12px}.demo-flow li span{display:grid;place-items:center;border-radius:50%;background:#294336;color:#e5d3a6;width:26px;height:26px;flex-shrink:0}.demo-comparison{margin-top:16px}.demo-comparison .code-block{white-space:pre-wrap;overflow-wrap:anywhere}
