@@ -44,3 +44,7 @@ npm start
 ```
 
 After source changes, run `npm run build` before restarting. PDF font/excerpt limits, Chromium-only browser coverage, and local educational scope are documented in README.md. No public deployment was performed.
+
+## Real-world learning enhancement
+
+Product search demonstrates an actual request and JSON response with safe text rendering. Fixed rich-text review samples are sanitized on the server, saved in a bounded SQLite table, re-sanitized on display, and counted in existing scan reports. Browser greeting updates use React text rendering without a request. Unsafe paths use fixed visual illustrations only. New regression results and hosted release status must be verified separately.

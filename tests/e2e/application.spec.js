@@ -210,8 +210,8 @@ test('real-world demo distinguishes server search, stored review and browser pre
   await page.reload();
   await page.getByRole('button',{name:'Customer review'}).click();
   await page.getByRole('button',{name:'Retrieve saved reviews'}).click();
-  await expect(page.getByTestId('demo-safe-text')).toHaveText('<b>Excellent notebook!</b>');
-  await expect(page.getByTestId('demo-safe-text').locator('b')).toHaveCount(0);
+  await expect(page.getByTestId('safe-preview').first().locator('strong')).toHaveText('Excellent notebook!');
+  await expect(page.getByTestId('safe-preview').first().locator('[style]')).toHaveCount(0);
   await page.getByRole('button',{name:'Live message'}).click();
   const calls=[];
   page.on('request',req=>{if(req.url().includes('/api/'))calls.push(req.url());});
@@ -225,4 +225,16 @@ test('protection page explains encoding using literal text', async ({page})=>{
   await expect(page.getByLabel('Encoded representation')).toHaveText('&lt;b&gt;Hello&lt;/b&gt;');
   await expect(page.getByTestId('encoding-safe-text')).toHaveText('<b>Hello</b>');
   await expect(page.getByTestId('encoding-safe-text').locator('b')).toHaveCount(0);
+});
+
+test('rich review removes disallowed formatting attributes and records a real scan', async ({page,request})=>{
+  const before=(await (await request.get('/api/summary')).json()).data.total;
+  await page.goto('/#demo');
+  await page.getByRole('button',{name:'Customer review'}).click();
+  await page.getByLabel('Sample review').selectOption('styled');
+  await page.getByRole('button',{name:'Post sample review'}).click();
+  await expect(page.getByTestId('safe-preview').locator('strong')).toHaveText('Excellent notebook!');
+  await expect(page.getByTestId('safe-preview').locator('[style]')).toHaveCount(0);
+  await expect(page.getByRole('link',{name:'View actual security event'})).toBeVisible();
+  expect((await (await request.get('/api/summary')).json()).data.total).toBe(before+1);
 });

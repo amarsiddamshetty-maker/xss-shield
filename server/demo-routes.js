@@ -1,10 +1,12 @@
+import { analyzeHtml } from './services/sanitizer.js';
+import { reviewSamples as samples } from '../shared/demo-samples.js';
 import { HttpError } from './middleware/errors.js';
 
 const products = [{name:'Notebook',price:120,icon:'file'},{name:'Desk lamp',price:850,icon:'home'},{name:'Backpack',price:990,icon:'lock'}];
-const samples = Object.freeze({plain:'Excellent notebook!',formatted:'<b>Excellent notebook!</b>'});
 const encode = value => value.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;');
 
-export function registerDemoRoutes(app, db) {
+export function registerDemoRoutes(app, repository) {
+  const db = repository.db;
   db.exec('CREATE TABLE IF NOT EXISTS demo_reviews (id INTEGER PRIMARY KEY AUTOINCREMENT, sample TEXT NOT NULL, created_at TEXT NOT NULL)');
   const insert = db.prepare('INSERT INTO demo_reviews (sample, created_at) VALUES (?, ?)');
   const list = db.prepare('SELECT id, sample, created_at FROM demo_reviews ORDER BY id DESC LIMIT 10');
@@ -15,10 +17,12 @@ export function registerDemoRoutes(app, db) {
     res.json({data:{term,encoded:encode(term),products:products.filter(p=>p.name.toLowerCase().includes(term.toLowerCase())),stored:false}});
   });
   app.post('/api/demo/reviews',(req,res)=>{
-    if(!req.is('application/json') || !req.body || Object.keys(req.body).length!==1 || !Object.hasOwn(samples,req.body.sample)) throw new HttpError(400,'INVALID_INPUT','Select a provided sample review.');
-    const record=insert.run(samples[req.body.sample],new Date().toISOString());
+    if(!req.is('application/json') || !req.body || Object.keys(req.body).length!==1 || typeof req.body.sample !== 'string' || !Object.hasOwn(samples,req.body.sample)) throw new HttpError(400,'INVALID_INPUT','Select a provided sample review.');
+    const analysis = analyzeHtml(samples[req.body.sample]);
+    const record=insert.run(analysis.sanitized_content,new Date().toISOString());
+    const event = repository.addEvent(analysis);
     prune.run();
-    res.status(201).json({data:{id:Number(record.lastInsertRowid),stored:true}});
+    res.status(201).json({data:{id:Number(record.lastInsertRowid),stored:true,analysis:event}});
   });
   app.get('/api/demo/reviews',(req,res)=>res.json({data:list.all()}));
 }

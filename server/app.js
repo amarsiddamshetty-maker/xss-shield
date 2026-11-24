@@ -52,7 +52,7 @@ export function createApp({ dbPath = resolve(projectRoot, 'data/xss-shield.sqlit
   app.use('/api', rateLimit({ windowMs: rateLimitWindowMs, limit: rateLimitMax, standardHeaders: 'draft-7', legacyHeaders: false, message: { error: { code: 'RATE_LIMITED', message: 'Too many requests. Wait a minute and try again.' } } }));
   app.use(express.json({ limit: '128kb', strict: true }));
 
-  registerDemoRoutes(app, repository.db);
+  registerDemoRoutes(app, repository);
   app.get('/api/health', (req, res) => {
     repository.db.prepare('SELECT 1').get();
     res.json({ data: { status: 'ok', service: 'XSS Shield', protection: 'active', storage: 'sqlite', publicDemo, eventLimit: publicDemo ? DEMO_EVENT_LIMIT : null } });
