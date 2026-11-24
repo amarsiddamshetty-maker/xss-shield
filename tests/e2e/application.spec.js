@@ -265,3 +265,22 @@ test('protection page compares text and sanitized formatting for the same input'
   await expect(page.getByTestId('comparison-text')).toHaveText('<b>Hello</b>');
   await expect(page.getByTestId('safe-preview').locator('b')).toHaveText('Hello');
 });
+
+test('sample verdicts explain both visible and invisible changes', async ({page})=>{
+  await page.goto('/#demo');
+  await page.getByRole('button',{name:'Search',exact:true}).click();
+  await expect(page.getByTestId('learning-outcome')).toContainText('formatting is not interpreted');
+  await page.getByRole('button',{name:'Customer review'}).click();
+  await page.getByLabel('Sample review').selectOption('titled');
+  await expect(page.getByTestId('unsafe-illustration').locator('p')).toHaveAttribute('title','Sample review');
+  await page.getByRole('button',{name:'Post sample review'}).click();
+  await expect(page.getByTestId('learning-outcome')).toContainText('tooltip removed; visible words unchanged');
+  await expect(page.getByTestId('safe-preview').locator('[title]')).toHaveCount(0);
+  await page.getByLabel('Sample review').selectOption('formatted');
+  await page.getByRole('button',{name:'Post sample review'}).click();
+  await expect(page.getByTestId('learning-outcome')).toContainText('permitted formatting preserved');
+  await expect(page.getByTestId('safe-preview').locator('b')).toHaveText('Excellent notebook!');
+  await page.getByLabel('Sample review').selectOption('plain');
+  await page.getByRole('button',{name:'Post sample review'}).click();
+  await expect(page.getByTestId('learning-outcome')).toContainText('ordinary text preserved');
+});

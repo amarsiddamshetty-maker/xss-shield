@@ -52,3 +52,7 @@ Product search demonstrates an actual request and JSON response with safe text r
 ## Application-wide review and comparison update
 
 Reviewed all nine page components. Fixed stale scanner results on input changes, added sample-matched non-executable illustrations and actual browser plain-text/rich-text comparison, and aligned dashboard, logs, reports and about descriptions with review telemetry. Review insert, scan event and retention pruning are transactional. Arbitrary input is never rendered in the illustrative panel; unknown examples appear as text. Browser rich-text output uses the existing strict SafePreview boundary and does not generate server events. Added regression tests for sample-specific illustrations and both protected modes. CI and hosted verification must be confirmed separately. This is a targeted source review, not an independent penetration test.
+
+## Final educational clarity pass
+
+Preselected examples emphasize visual differences. Results explain why plain-text input is literal, why allowed formatting remains, and why removed tooltip attributes need not change visible words. The tooltip illustration uses a fixed harmless React attribute; arbitrary input is never rendered in the unprotected panel. Verdicts distinguish policy changes from attack evidence. Added browser regression coverage for the tooltip, preserved bold, ordinary text and reflected text. Hosted and CI results remain separately verified.

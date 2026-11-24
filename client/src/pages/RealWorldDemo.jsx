@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Card, CodeBlock, ErrorMessage, Icon, PageHeading, SafePreview, Badge } from '../components/UI.jsx';
-import { Illustration, ProtectionComparison } from '../components/ProtectionComparison.jsx';
+import { Illustration, ProtectionComparison, Outcome } from '../components/ProtectionComparison.jsx';
 import { api } from '../services/api.js';
 import { reviewSamples } from '../../../shared/demo-samples.js';
 
@@ -9,14 +9,14 @@ const scenarios={
   review:{title:'Customer review',type:'Stored XSS',steps:['Customer A selects sample','DOMPurify sanitizes','SQLite saves output','Customer B retrieves later'],purpose:'A customer writes a formatted review. Another customer reads it later, even after a refresh.',risk:'Content from a database is still untrusted. Formatting must be restricted before display.',technique:'Server-side sanitization, bound SQL parameters and browser re-sanitization'},
   preview:{title:'Live message',type:'DOM-based XSS',steps:['Browser input','React state','DOM text update'],purpose:'A customer customizes a welcome message. JavaScript updates the page immediately.',risk:'Browser code may accidentally interpret input as instructions instead of text.',technique:'React text interpolation; no HTML insertion'}
 };
-const labels={plain:'Ordinary text',formatted:'Allowed bold formatting',styled:'Disallowed style + allowed bold',titled:'Disallowed title attribute',list:'Allowed list formatting'};
+const labels={plain:'No change — ordinary text',formatted:'No change — allowed bold',styled:'Visible change — red style removed',titled:'Behavior change — tooltip removed',list:'No change — allowed list'};
 const searchExamples=[['Notebook','Normal product search'],['<b>Notebook</b>','Markup-like search'],['Paper & pens','Special character'],['Unknown product','No matching product']];
 const previewExamples=[['Welcome!','Normal greeting'],['<b>Welcome!</b>','Markup-like greeting'],['Books & stationery','Special character'],['"Hello"','Quotation marks'],['<p style="color:red"><strong>Excellent notebook!</strong></p>','Styled rich-text sample']];
 function Flow({steps}){return <ol className="demo-flow">{steps.map((step,index)=><li key={step}><span>{index+1}</span><strong>{step}</strong></li>)}</ol>;}
 function ExampleButtons({items,onSelect,disabled=false}){return <div className="demo-examples">{items.map(([value,label])=><button key={label} type="button" disabled={disabled} className="button ghost small" onClick={()=>onSelect(value)}>{label}</button>)}</div>;}
 function Scenario({mode}){
  const lesson=scenarios[mode];
- const [value,setValue]=useState(mode==='search'?'Notebook':mode==='preview'?'Welcome!':'styled');
+ const [value,setValue]=useState(mode==='search'?'<b>Notebook</b>':mode==='preview'?'<p style="color:red"><strong>Excellent notebook!</strong></p>':'styled');
  const [result,setResult]=useState(null);
  const [submitted,setSubmitted]=useState('');
  const [reviews,setReviews]=useState(null);
@@ -36,9 +36,9 @@ function Scenario({mode}){
  {mode==='search'&&result&&<><h3>Shop search results</h3><p>Search results for: <strong className="demo-text">{result.term}</strong></p><div className="demo-products">{result.products.map(p=><article key={p.name}><Icon name={p.icon} size={30}/><h3>{p.name}</h3><span>₹{p.price}</span></article>)}</div>{!result.products.length&&<p>No matching products. Try Notebook.</p>}</>}
  {mode==='review'&&result&&<p role="status">SQLite saved review #{result.id}. Retrieve it as Customer B.</p>}
  </Card>
- <Card title="What a visitor actually sees" eyebrow="03 / COMPARE">
- <div className="demo-comparison"><div><h3>Without protection — illustration only</h3><p>{lesson.risk}</p><Illustration value={illustrationInput}/></div>
- <div><h3>With protection — actual result</h3>{mode==='review'?analysis?<><Badge status={analysis.status}/><SafePreview html={analysis.sanitized_content}/></>:<p>Post a sample review to see the sanitized formatting.</p>:<div className="demo-visitor" data-testid="demo-safe-text">{shown??'Submit a search to see the result.'}</div>}<p>{lesson.technique}</p></div></div>
+ <Card title="Compare the result — what is correct and why?" eyebrow="03 / COMPARE">
+ <div className="demo-comparison"><div><h3>Unrestricted formatting — simulation</h3><p>{lesson.risk}</p><Illustration value={illustrationInput}/></div>
+ <div><h3>{mode==='review'?'Protected review — actual sanitized HTML':'Protected text — actual result'}</h3>{mode==='review'?analysis?<><Badge status={analysis.status}/><SafePreview html={analysis.sanitized_content}/></>:<p>Post a sample review to see the sanitized formatting.</p>:<div className="demo-visitor" data-testid="demo-safe-text">{shown??'Submit a search to see the result.'}</div>}<p>{lesson.technique}</p></div></div><Outcome value={illustrationInput} mode={mode==='review'?'rich':'text'} analysis={analysis} ready={mode==='preview'||Boolean(result)}/>
  {mode==='review'&&analysis&&<><h3>Security analysis</h3><p>Original sample</p><CodeBlock>{submitted}</CodeBlock><p>Sanitized HTML</p><CodeBlock>{analysis.sanitized_content}</CodeBlock><dl className="demo-metrics"><div><dt>Elements removed</dt><dd>{analysis.removed_elements}</dd></div><div><dt>Attributes removed</dt><dd>{analysis.removed_attributes}</dd></div></dl><p>{analysis.explanation}</p><a className="text-button" href={'#logs?event='+analysis.id}>View actual security event <Icon name="arrow" size={16}/></a></>}
  {mode!=='review'&&shown!==undefined&&<><button type="button" className="button ghost small" aria-expanded={technical} onClick={()=>setTechnical(!technical)}>{technical?'Hide technical details':'Show technical details'}</button>{technical&&<><p>{mode==='search'?'Server JSON response. React renders the original term safely; the encoded string is educational.':'React renders a text value, not HTML. Encoding the string manually is unnecessary for this text-rendering operation.'}</p>{mode==='search'&&<CodeBlock>{JSON.stringify(result,null,2)}</CodeBlock>}{mode==='preview'&&<CodeBlock>{shown}</CodeBlock>}</>}</>}
  </Card></div>
@@ -49,5 +49,5 @@ function Scenario({mode}){
 }
 export default function RealWorldDemo(){
  const [mode,setMode]=useState('search');
- return <><PageHeading eyebrow="REAL-WORLD LEARNING" title="Real-World Demo">One fictional shop, three distinct ways user data reaches a webpage. Learn why each protection technique matters.</PageHeading><div className="notice"><Icon name="info"/><div><strong>Safe learning environment</strong><p>No purchases, personal information or executable attack examples. Review history is shared and temporary on the Free host.</p></div></div><div className="tabs demo-tabs" role="group" aria-label="Demo scenarios">{Object.entries(scenarios).map(([key,item])=><button key={key} type="button" className={mode===key?'selected':''} aria-pressed={mode===key} onClick={()=>setMode(key)}>{item.title}</button>)}</div><Scenario key={mode} mode={mode}/></>;
+ return <><PageHeading eyebrow="REAL-WORLD LEARNING" title="Real-World Demo">Start with the preselected formatting example, run the operation, and read the result verdict. Identical output can be correct when content is already allowed.</PageHeading><div className="notice"><Icon name="info"/><div><strong>Safe learning environment</strong><p>No purchases, personal information or executable attack examples. Review history is shared and temporary on the Free host.</p></div></div><div className="tabs demo-tabs" role="group" aria-label="Demo scenarios">{Object.entries(scenarios).map(([key,item])=><button key={key} type="button" className={mode===key?'selected':''} aria-pressed={mode===key} onClick={()=>setMode(key)}>{item.title}</button>)}</div><Scenario key={mode} mode={mode}/></>;
 }
